@@ -9,7 +9,7 @@ const inputValue = ref('')
 
 const addTodo = (e: any) => {
   if (e.key === 'Enter') {
-    todos?.push(inputValue.value)
+    // todos?.push(inputValue.value)
     inputValue.value = ''
   }
 }

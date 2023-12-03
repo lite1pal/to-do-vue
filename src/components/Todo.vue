@@ -6,7 +6,7 @@ const { todo, todos } = defineProps({
 })
 
 const deleteTodo = (e: any) => {
-  todos?.splice(todos.indexOf(e.target.innerHTML), 1)
+  // todos?.splice(todos.indexOf(e.target.innerHTML), 1)
 }
 </script>
 <template>
