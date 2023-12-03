@@ -1,47 +1,52 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, watch, watchEffect } from 'vue'
+import HeaderVue from './components/Header.vue'
+import TodoInput from './components/TodoInput.vue'
+import Todo from './components/Todo.vue'
+
+const STORAGE_KEY = 'vue-todomvc'
+
+const todos = ref(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'))
+
+// persist state
+watchEffect(() => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value))
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <header>
+      <HeaderVue />
+      <div class="todo-main">
+        <TodoInput :todos="todos" />
+        <div v-for="(todo, i) in todos">
+          <Todo :key="i" :todo="todo" :todos="todos" />
+        </div>
+      </div>
+    </header>
   </main>
 </template>
 
 <style scoped>
+main {
+  background-color: #f5f5f5;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
 header {
-  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 200;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.todo-main {
+  display: flex;
+  flex-direction: column;
 }
 </style>

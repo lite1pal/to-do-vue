@@ -12,6 +12,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@heroicons/vue": "^2.0.18",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.19",
     "vue": "^3.3.4"
   },
   "devDependencies": {
